@@ -33,7 +33,19 @@ function getModules(_file) {
     return result
 }
 
+function modToUrl(_mod) {
+    
+    return {}
+}
+
+function getConfigs(_file) {
+    
+    return {}
+}
+
 exports.getModules = getModules
+exports.modToUrl = modToUrl
+exports.getConfigs = getConfigs
 //var test_file = path.resolve('./test/example/x/a.php')
 //var mods = getModules(test_file)
 //console.log(mods)
