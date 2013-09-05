@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="金鹰网新用户注册">
+<title><?php echo $this->title;?></title>
+<link rel="shortcut icon" href="http://honey.hunantv.com/i/image/favicon.png" type="image/x-icon" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-mail-check.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body class="pr">
+<div class="header">
+    <div class="wrap pr">
+        <h1 class="logo pa"><a class="hide-text" href="/" title="金鹰微空间">金鹰微空间</a></h1>
+        <ul class="nav clearfix pa">
+            <li><a href="/" title="首页">首页</a></li>
+            <li><a href="/star/" title="明星墙">明星墙</a></li>
+            <li><a href="/tv/" title="剧集库">剧集库</a></li>
+            <li><a href="/show/" title="综艺库">综艺库</a></li>
+            <li><a class="no-border" href="/movie/" title="电影库">电影库</a></li>
+        </ul>
+        <div class="option clearfix pa"></div>
+    </div>
+</div>
+<!-- 页面提示 -->
+<div class="content wrap">
+    <div class="top min-h"></div>
+    <div class="middle clearfix tc">
+        <div class="mod-nav tl">
+            <dl class="mod-mail-check" style="padding-top:180px;">
+            	<!-- via -->
+                <dd class="mail-check-ok"></dd>
+                <dt>恭喜您，已经通过邮箱验证！</dt>
+                <dd class="mail-check-txt">页面将在 <span id="time">5</span> 秒后进行跳转...如长时间无反应，请 <a href="http://i.hunantv.com" title="点击此处">点击此处</a> 继续完善您的资料！</dd>
+                <!-- via -->
+            </dl>
+        </div>
+    </div>
+    <div class="bottom min-h"></div>
+</div>
+<!-- 页面提示 -->
+<script>
+(function(){
+	var time = 5, $ = function(id){
+		return document.getElementById(id);
+	}, tFuc = function(){
+		$('time').innerHTML = --time;
+		time ? setTimeout(tFuc, 1000) : window.location.href = 'http://i.hunantv.com';
+	};
+	setTimeout(tFuc, 1000);
+})();
+</script>
+<?php $this->layout("footer_index"); ?>

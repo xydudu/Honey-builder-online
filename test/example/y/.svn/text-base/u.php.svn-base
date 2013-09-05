@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="<?php echo $this->title;?>">
+<title><?php echo $this->title;?></title>        
+<link rel="shortcut icon" href="http://honey.hunantv.com/i/image/global/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-index.css?20120911" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/front-frame.css?20120911" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-290.css?20120911" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-590.css?20120911" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-dialog.css?20120911" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-200.css?20120911" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-700.css?20120921" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="http://honey.hunantv.com/i/css/page/mod-wall.css?20120911" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body class="pr">
+<?php $this->layout("header_v1"); ?>
+<div class="content wrap">
+	<div class="top min-h"></div>
+	<div class="middle clearfix">
+		<div class="mod-590 fl">
+			<?php
+				if($this->actives)
+				{
+			?>
+			<div class="mod-590-title">
+				<h2 class="one-line"><?php echo $this->user['nickname'];?> 的最新动态 <a href="/<?php echo $this->user['uid'];?>/activity" title="所有动态">所有动态</a></h2>
+			</div>
+			<ul class="mod-590-list">
+				<?php
+					foreach ($this->actives as $k=>$v) 
+					{
+				?>
+				<li class="clearfix">
+					<div class="section">
+					   <?php echo $v['active'];?>
+					</div>
+					<div class="section clearfix">
+						<?php
+							if($v['type']=="star")
+							{
+						?>
+						<a href="<?php echo create_lib_fans_url($v['type'], $v['libinfo']['id']);?>" class="fl pic" title="<?php echo $v['libinfo']['title'];?>"><img class="hn-lazy" src="http://honey.hunantv.com/i/image/icon/grey.gif" rel="<?php echo $v['libinfo']['image'];?>" alt="<?php echo $v['libinfo']['title'];?>" width="60" height="60"></a>
+						<dl class="fl ml15 star">
+							<dt><?php echo $v['libinfo']['constellation'];?> / <?php echo $v['libinfo']['nationality'];?></dt>
+							<dd>代表作：<?php echo $v['libinfo']['opus'];?></dd>
+							<dd>
+								粉丝：<a href="/<?php echo $v['type'];?>/<?php echo $v['libinfo']['id'];?>/followers" class="num" title="<?php echo $v['libinfo']['fans_count'];?>"><?php echo $v['libinfo']['fans_count'];?></a>
+							</dd>
+						</dl>
+						<?php
+							} else {
+						?>
+						<a href="<?php echo create_lib_fans_url($v['type'], $v['libinfo']['id']);?>" class="fl pic" title="<?php echo $v['libinfo']['title'];?>"><img class="hn-lazy" src="http://honey.hunantv.com/i/image/icon/grey.gif" rel="<?php echo $v['libinfo']['image'];?>" alt="<?php echo $v['libinfo']['title'];?>" width="60" height="78"></a>
+						<dl class="fl info film">
+							<dt class="section"><?php echo $v['libinfo']['content'];?></dt>
+							<dd class="f12">   粉丝：<a href="/<?php echo $v['type'];?>/<?php echo $v['libinfo']['id'];?>/followers" class="num" title="<?php echo $v['libinfo']['fans_count'];?>"><?php echo $v['libinfo']['fans_count'];?></a></dd>
+						</dl>
+						<?php } ?>
+					</div>
+					<div class="c999 f12"><?php echo $v['offsettime'];?></div>
+				</li>
+				<?php
+					}
+				?>
+			</ul>
+			<?php
+				}
+			?>
+			<!--E mod-590-list-->
+			<!--B page-->
+			<!--E page-->
+			<!--B mod-590-title-->
+			<?php
+				if(!empty($this->favorite_movies))
+				{
+			?>
+			<div class="mod-590-title">
+				<h2 class="one-line mt20"><?php echo $this->user['nickname'];?> 关注的电影<a href="/<?php echo $this->user['uid'];?>/favorite/movie" title="所有动态">(全部 <?php echo $this->user['followmovie_count'];?>)</a></h2>
+			</div>
+			<!--E mod-590-title-->
+			<!--B mod-590-list-->
+			<ul class="mod-590-list">
+				<li class="clearfix">
+				<?php
+					foreach($this->favorite_movies as $k=>$v)
+					{
+				?>
+					<div class="fl mr20">
+						<a href="<?php echo create_lib_fans_url('movie',$v['id']);?>" class="fl pic" title="<?php echo $v['title'];?>"><img class="hn-lazy" src="http://honey.hunantv.com/i/image/icon/grey.gif" rel="<?php echo create_lib_image_src($v['image']);?>" alt="<?php echo $v['title'];?>" width="60" height="78"></a>
+						<a href="<?php echo create_lib_fans_url('movie',$v['id']);?>" class="cl fl tc film-name" title="<?php echo $v['title'];?>" target="_blank_"><?php echo $v['title'];?></a>
+					</div>
+				<?php
+					}
+				?>
+				</li>
+			</ul>
+			<?php
+				}
+			?>
+			<!--E mod-590-list-->
+			<!--B mod-590-title-->
+			<?php
+				if(!empty($this->favorite_tvs))
+				{
+			?>
+			<div class="mod-590-title">
+				<h2 class="one-line mt20"><?php echo $this->user['nickname'];?> 关注的剧集<a href="/<?php echo $this->user['uid'];?>/favorite/tv" title="所有动态">(全部 <?php echo $this->user['followtv_count'];?>)</a></h2>
+			</div>
+			<!--E mod-590-title-->
+			<!--B mod-590-list-->
+			<ul class="mod-590-list">
+				<li class="clearfix">
+				<?php
+					foreach($this->favorite_tvs as $k=>$v)
+					{
+				?>
+					<div class="fl mr20">
+						<a href="<?php echo create_lib_fans_url('tv',$v['id']);?>" class="fl pic" title="<?php echo $v['title'];?>"><img class="hn-lazy" src="http://honey.hunantv.com/i/image/icon/grey.gif" rel="<?php echo create_lib_image_src($v['image']);?>" alt="<?php echo $v['title'];?>" width="60" height="78"></a>
+						<a href="<?php echo create_lib_fans_url('tv',$v['id']);?>" class="cl fl tc film-name" title="<?php echo $v['title'];?>"><?php echo $v['title'];?></a>
+					</div>
+				<?php
+					}
+				?>
+				</li>
+			</ul>
+			<?php
+				}
+			?>
+			<!--E mod-590-list-->
+			<!--B mod-590-title-->
+			<?php
+				if(!empty($this->favorite_shows))
+				{
+			?>
+			<div class="mod-590-title">
+				<h2 class="one-line mt20"><?php echo $this->user['nickname'];?> 关注的综艺<a href="/<?php echo $this->user['uid'];?>/favorite/show" title="所有动态">(全部 <?php echo $this->user['followshow_count'];?>)</a></h2>
+			</div>
+			<!--E mod-590-title-->
+			<!--B mod-590-list-->
+			<ul class="mod-590-list">
+				<li class="clearfix">
+				<?php
+					foreach($this->favorite_shows as $k=>$v)
+					{
+				?>
+					<div class="fl mr20">
+						<a href="<?php echo create_lib_fans_url('show',$v['id']);?>" class="fl pic" title="<?php echo $v['title'];?>"><img class="hn-lazy" src="http://honey.hunantv.com/i/image/icon/grey.gif" rel="<?php echo create_lib_image_src($v['image']);?>" alt="<?php echo $v['title'];?>" width="60" height="78"></a>
+						<a href="<?php echo create_lib_fans_url('show',$v['id']);?>" class="cl fl tc film-name" title="<?php echo $v['title'];?>"><?php echo $v['title'];?></a>
+					</div>
+				<?php
+					}
+				?>
+				</li>
+			</ul>
+			<?php
+				}
+			?>
+			<!--E mod-590-list-->
+			<!--B mod-590-title-->
+			<?php
+				if(!empty($this->favorite_stars))
+				{
+			?>
+			<div class="mod-590-title">
+				<h2 class="one-line mt20"><?php echo $this->user['nickname'];?> 喜欢的明星<a href="/<?php echo $this->user['uid'];?>/favorite/star" title="所有动态">(全部 <?php echo $this->user['followstar_count'];?>)</a></h2>
+			</div>
+			<!--E mod-590-title-->
+			<!--B mod-590-list-->
+			<ul class="mod-590-list">
+				<li class="clearfix">
+				<?php
+					foreach($this->favorite_stars as $k=>$v)
+					{
+				?>
+					<div class="fl mr20">
+						<a href="<?php echo create_lib_fans_url('star',$v['id']);?>" class="fl pic" title="<?php echo $v['title'];?>"><img class="hn-lazy" src="http://honey.hunantv.com/i/image/icon/grey.gif" rel="<?php echo $v['image'];?>" alt="<?php echo $v['title'];?>" width="60" height="60"></a>
+						<a href="<?php echo create_lib_fans_url('star',$v['id']);?>" class="cl fl tc film-name" title="<?php echo $v['title'];?>"><?php echo $v['title'];?></a>
+					</div>
+				<?php
+					}
+				?>
+				</li>
+			</ul>
+			<?php
+				}
+			?>
+			<!--E mod-590-list-->
+		</div>
+		<div class="mod-290 fl ml30">
+			<!--B mod-290-user-info-->
+			<?php $this->widget('uprofile',array('user'=>$this->user))->show(); ?>
+			<!--E mod-290-nav-list-->
+			<!--B mod-290-user-list-->
+			<!-- 好友模块开始 -->
+			<?php $this->widget('ufriend',array('user'=>$this->user))->show(); ?>
+			<!-- 好友模块结束 -->
+			<!-- 共同关注模块开始 -->
+			<?php $this->widget('Commonfollow',array('uid'=>$this->my_uid,'target_uid'=>$this->uid,'type'=>'all'))->show(); ?>
+			<!-- 共同关注模块结束 -->
+			<!--E mod-290-user-list-->
+			<!--B mod-290-film-list-->
+			<!--E mod-290-game-list-->
+		 
+		</div>
+	</div>
+	<div class="bottom min-h"></div>
+</div>
+<script src="http://honey.hunantv.com/honey-2.0/honey.ihunantv.js"></script>
+<script>
+	HN.go("lib:jquery,mod:dialog,mod_alert,mod_signature,mod_addfriend,mod_lazyload,mod_filmtab", function() {
+		HN.lazyload();
+		HN.addfriend(<?php echo $this->uid; ?>,<?php echo $this->my_uid;?>);
+		HN.filmtab();
+	});
+</script>
+<?php $this->layout("footer"); ?>

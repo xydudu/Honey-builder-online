@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>用户引导页、帮助页面_金鹰微空间</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            html, body {
+                height: 100%;
+                overflow: hidden;
+            }
+            #htmlwrap {
+                line-height: 3;
+                overflow: auto;
+                width: 100%;
+                height: 100%;
+            }
+            .lightBox, .popupCover, .popupIframe, .popupComponent {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .popupComponent {
+                display: none;
+                z-index: 999;
+            }
+            .popupCover {
+                background: #000;
+                opacity: 0.7;
+                *filter: alpha(opacity=70);
+            }
+            .lightBox {
+                text-align: center;
+                overflow: auto;
+            }
+            .lightBoxContent {
+                position: relative;
+                display: inline-block;
+                *display: inline;
+                zoom: 1;
+                width: 600px;
+                height: 472px;
+                vertical-align: middle;
+                background-image: url(http://honey.hunantv.com/i/image/global/how-to-use-1.png);
+            }
+            #htu-exit {
+                position: absolute;
+                right: 105px;
+                top: 440px;
+                font-size: 12px;
+                line-height: 1.2em;
+                color: #666;
+                text-decoration: none;
+            }
+            #htu-next {
+                position: absolute;
+                right: 10px;
+                top: 435px;
+                display: block;
+                width: 80px;
+                height: 25px;
+                text-indent: -1000px;
+                overflow: hidden;                
+                background: url(http://honey.hunantv.com/i/image/global/htu-next.png);
+            }
+            #htu-over {
+                position: absolute;
+                right: 10px;
+                top: 435px;
+                display: none;
+                width: 147px;
+                height: 25px;
+                text-indent: -1000px;
+                overflow: hidden;                
+                background: url(http://honey.hunantv.com/i/image/global/htu-over.png);
+            }
+            .lightBoxMaxHeight {
+                display: inline-block;
+                vertical-align: middle;
+                height: 100%;
+                *height: 99.5%;
+                width: 1px;
+                overflow: hidden;
+                margin-left: -1px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="htmlwrap">
+                  
+        </div>
+        <script>
+            var howToUse = {
+                index: 1,
+                baseUrl: 'http://honey.hunantv.com/i/image/global/',
+                $ : function($id) { //根据id获取dom
+                    return document.getElementById($id);
+                },
+                addEvent : function(obj, type, fn) { //事件绑定
+                    if(obj.attachEvent) {
+                        obj['e' + type + fn] = fn;
+                        obj[type + fn] = function() {
+                            obj['e' + type + fn](window.event);
+                        }
+                        obj.attachEvent('on' + type, obj[type + fn]);
+                    } else
+                        obj.addEventListener(type, fn, false);
+                },
+                init : function() {
+                    var self = this;
+                    self.dom = self.renderHtml();
+                    self.showDom();                    
+                    self.initEvent();
+                    self.preLoadImg();
+
+                },
+                initEvent : function() {
+                    var self = this;
+                    self.addEvent(self.$('htu-exit'), 'click', function(){
+                        self.hideDom();
+                    });
+                    self.addEvent(self.$('htu-next'), 'click', function(){
+                        self.next();
+                    });
+                    self.addEvent(self.$('htu-over'), 'click', function(){
+                        self.hideDom();
+                    });
+                },
+                preLoadImg : function() {
+                    var self = this; 
+                    setTimeout(function(){
+                       var img = [];
+                        for(var i = 5; i > 1; i--) {
+                            img[i] = new Image();
+                            img[i].src = self.baseUrl + 'how-to-use-' + i + '.png';
+                        } 
+                    }, 1000);                                                
+                },
+                next : function() {
+                    var self = this, htuContent = self.$('htu-content');
+                    self.index === 5 ? self.index = 1 : self.index++;
+                    htuContent.style.backgroundImage = 'url(' + self.baseUrl + 'how-to-use-' + self.index + '.png)';
+                    self.index > 4 && self.changeBT();                 
+                },
+                changeBT : function() {
+                    var self = this;
+                    self.$('htu-exit').style.display = 'none';
+                    self.$('htu-next').style.display = 'none';
+                    self.$('htu-over').style.display = 'block';                    
+                },
+                renderHtml : function() {
+                    var self = this, 
+                    html = '<div class="popupComponent" id="ho-to-use">' 
+                         + '<div class="popupCover"></div>' + '<div class="lightBox">' 
+                         + '<span class="lightBoxMaxHeight"></span>' 
+                         + '<div class="lightBoxContent" id="htu-content">'
+                         + '<a id="htu-exit" href="javascript:" title="退出引导">退出引导</>'
+                         + '<a id="htu-next" href="javascript:" title="继续引导">继续引导</>'
+                         + '<a id="htu-over" href="/account/fillprofile/step/basicinfo" title="引导结束，立即体验">引导结束，立即体验</>'
+                         + '</div>' 
+                         + '</div>' 
+                         + '</div>', 
+                         wrap = self.$('htmlwrap');
+                    self.$('ho-to-use') || (wrap.innerHTML += html);
+                    return self.$('ho-to-use');
+                },
+                showDom : function() {
+                    var self = this;
+                    self.dom.style.display = 'block';
+                },
+                hideDom : function() {
+                    var self = this;
+                    self.dom.style.display = 'none';
+					window.location.href = '/account/fillprofile/step/basicinfo';
+                }
+            }
+            howToUse.init();
+        </script>
+    </body>
+</html>

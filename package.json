@@ -1,0 +1,29 @@
+{ 
+    "name": "Honey-builder-online",
+    "description": "honey builder online system",
+    "main": "./index", 
+    "author": "Lian Hsueh",
+    "version": "0.1.0",
+    "repository": {
+        "type" : "git",
+        "url" : "http://github.com/xydudu/Honey-builder-online.git"
+    },
+    "bugs" : { "url" : "http://github.com/xydudu/Honey-builder-online/issues" },
+    "licenses" : [
+        { 
+            "type" : "MIT",
+            "url" : "http://github.com/xydudu/Honey-builder-online/raw/master/LICENSE"
+        }
+    ],
+    "dependencies": {
+        "connect": "",
+        "jade": "",
+        "dispatch": "",
+        "underscore": ""
+    },
+    "devDependencies": {
+        "should": "",
+        "mocha": ""
+    },
+    "engines": { "node": ">= 0.8.0" }
+}

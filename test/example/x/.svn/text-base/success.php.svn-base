@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="登录成功_金鹰网">
+<title><?php echo $this->title;?></title>
+<link rel="shortcut icon" href="http://honey.hunantv.com/i/image/global/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="http://honey.hunantv.com/hunantv/css/page/page-login.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body class="pr">
+<?php $this->layout("nav"); ?>
+<div class="content wrap">
+	<div class="top min-h"></div>
+	<div class="middle clearfix tc">                
+        <div class="login-success">
+            <p class="login-success-p"><span></span>登录成功，接下来您可以选择</p>
+            <p class="login-success-btnp clearfix"><a href="http://www.hunantv.com/" class="login-mod-btn">返回金鹰网首页</a><a href="http://i.hunantv.com/" class="login-mod-btn-a">进入我的空间</a></p>
+        </div>
+    </div>
+    <div class="bottom min-h"></div>
+</div>
+<?php $this->layout("footer_index"); ?>

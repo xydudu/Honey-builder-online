@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account
+END
+emailauth.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/emailauth.php
+END
+how_to_use.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/coolcms/!svn/ver/22697/i/branches/dev1.2/application/views/account/how_to_use.php
+END
+basicinfo.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/coolcms/!svn/ver/28874/i/branches/dev1.2/application/views/account/basicinfo.php
+END
+inboxlink.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/inboxlink.php
+END
+follow_user.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/follow_user.php
+END
+upload_avatar.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/coolcms/!svn/ver/28875/i/branches/dev1.2/application/views/account/upload_avatar.php
+END
+emailactive.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/emailactive.php
+END
+register.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/register.php
+END
+login.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/login.php
+END
+success.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/coolcms/!svn/ver/28877/i/branches/dev1.2/application/views/account/success.php
+END

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="金鹰网新用户注册">
+<title><?php echo $this->title;?></title>
+<link rel="shortcut icon" href="http://honey.hunantv.com/i/image/global/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="http://honey.hunantv.com/hunantv/css/page/page-login.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body class="pr">
+<?php $this->layout("nav"); ?>
+<div class="content wrap">
+	<div class="top min-h"></div>
+	<div class="middle clearfix tc">
+        <div class="mod-login clearfix">
+            <div class="mod-login-l fl">
+                <h1 class="login-h1">金鹰网帐号注册</h1>
+                <div class="login-con">
+                	<form action="/account/signup" method="post" autocomplete="off" id="reg-form">
+                    <p class="clearfix"><label class="login-label">帐号</label><input type="text" id="username" ajax-check="true" name="email" maxlength="30" placeholder="请输入常用邮箱" class="login-input"><span style="display:none"></span></p>
+
+                    <p class="clearfix"><label class="login-label">密码</label><input type="password" id="password"  maxlength="18" placeholder="" class="login-input"><span style="display:none"></span></p>
+
+                    <input type="hidden" id="password-encode" name="password" >
+
+                    <p class="clearfix"><label class="login-label">确认密码</label><input type="password" id="re-password" name="repassword" maxlength="18" placeholder="" class="login-input"><span style="display:none"></span></p>
+
+                    <p class="clearfix"><label class="login-label">验证码</label><input type="text" id="verify-code" name="virfycode" placeholder="验证码" class="login-input-a"><strong id="codeimg" ><img class="fl mr10" width="120px" height="40px" src="http://i.hunantv.com/account/virfycode" alt="验证码"></strong><span style="display:none"></span></p>
+
+                    <p class="clearfix check-tstext">看不清？<a class="refresh" href="javascript:" title="换一张" id="refresh-code">换一张</a></p>
+
+                    <p class="clearfix login-check"><input id="agree" type="checkbox" value="1" checked="checked"><label for="remember">同意"<a href="http://passport2.hunantv.com/index.php?ac=agreement&ts=reg1" title="服务条款" target="_blank">服务条款</a>"和"<a href="http://passport2.hunantv.com/index.php?ac=agreement&ts=reg2" title="隐私权保护和个人信息利用政策" target="_blank">隐私权保护和个人信息利用政策</a>"</label></p>
+
+                    <p class="clearfix"><input type="submit" value="注 册" class="login-mod-btn login-btn"></p>
+                    </form>
+                </div>                        
+            </div>
+            <div class="mod-login-r fr">
+                <div class="login-top min-h"></div>
+                <div class="login-mid register-box">
+                    <span class="login-mid-rspan">已有金鹰网帐号，请直接登录</span>
+                    <a href="/login" class="login-mod-btn register-btn">登 录</a>
+                    <div class="other-login">
+                        <p>第三方帐号登录</p>
+                        <p class="clearfix"><a href="#" onclick="return login3rd(200);"><em class="ico-sina hide-text">新浪</em><span>新浪微博</span></a><a href="#" onclick="return login3rd(110);"><em class="ico-qqt hide-text">腾讯</em><span>腾讯微博</span></a><a href="#" onclick="return login3rd(100);"><em class="ico-qq hide-text">QQ</em><span>QQ帐号</span></a></p>
+                    </div>
+                </div>
+                <div class="login-bottom min-h"></div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom min-h"></div>
+</div> 
+<script src="http://honey.hunantv.com/honey-2.0/honey.ihunantv.js"></script>
+<script>
+honey.go("lib:jquery, plugin:pswencode, mod:dialog, mod_suggestion, mod_login", function() {
+    honey.login();
+});
+function login3rd(type) {
+	var url = 'http://passport2.hunantv.com/oauth/?action=step&step=ca2e2a4d9872750a49778920e284c000&type='+type+'&rs=http://i.hunantv.com/account/success';
+	window.location = url;
+    return false;
+}
+</script>
+<?php $this->layout("footer_index"); ?>
+</body>
+</html>
