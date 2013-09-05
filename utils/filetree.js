@@ -1,9 +1,11 @@
+/*
+ * Lian Hsueh
+ * Get files tree from a directory -- Honey builer online  
+ * from 9.4/2013 to ... endless
+ *
+ * */
+
 'use strict'
-
-
-// for test
-//var  project_path = '/Users/linlei/www/ihunantv.dev1.2/application/views'
-
 
 var 
 fs = require('fs'),
@@ -33,10 +35,3 @@ function getTree(_path, _arr) {
 }
 
 exports.getTree = getTree
-
-// for test
-//var x = getTree(project_path)
-//console.log(x)
-
-
-

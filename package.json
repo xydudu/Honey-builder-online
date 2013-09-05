@@ -19,7 +19,8 @@
         "connect": "",
         "jade": "",
         "dispatch": "",
-        "underscore": ""
+        "underscore": "",
+        "underscore.string": ""
     },
     "devDependencies": {
         "should": "",

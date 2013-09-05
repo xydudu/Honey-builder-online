@@ -135,7 +135,10 @@
 </div>
 <script src="http://honey.hunantv.com/honey-2.0/honey.ihunantv.js"></script>
 <script>
-HN.go("lib:jquery,mod:dialog,mod_alert,mod_signature,mod_zoom,mod_photo,mod_video,mod_page,mod_lazyload,mod_slide,mod_ad,mod_change,mod_share,mod_gototop", function() {
+                HN.go("lib:jquery,mod:dialog,"
+
+                    + "mod_alert,mod_signature,mod_zoom,mod_photo,"
+                    + "mod_video,mod_page,mod_lazyload,mod_slide,mod_ad,mod_change,mod_share,mod_gototop", function() {
 	HN.lazyload();
 	HN.zoom();
 	HN.gototop();
