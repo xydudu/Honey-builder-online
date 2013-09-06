@@ -64,36 +64,34 @@ describe("取模块URL", function () {
             pub: 'http://honey.hunantv.com/honey-2.0/',
             root: 'http://honey.hunantv.com/i/js/'
         };
+        parser.getConfigs(test_file).then(function(config) {
+            config.should.eql(except);
+        });
 
-        var config = parser.getConfigs(test_file);
-
-        config.should.eql(except);
-        
     });
 
     it("公共模块 -> 模块URL", function() {
         var root = 'http://honey.hunantv.com/honey-2.0/';
         var mod = 'lib:jquery';
+        var config = {
+            pub: 'http://honey.hunantv.com/honey-2.0/',
+            root: 'http://honey.hunantv.com/i/js/'
+        };
         var except = {"name": "lib:jquery", "path": root +"lib/jquery.js"};
-        //var mods = [
-        //    "lib:jquery",
-        //    "mod_login"
-        //];
-        //var except = [
-        //    {"name": "lib:jquery", "path": config.pub +"lib/jquery.js"},
-        //    {"name": "mod_login", "path": config.root +"mod/login.js"}
-        //]
-
-        var result = parser.modToUrl(mod);
+        var result = parser.modToUrl(mod, config);
         result.should.eql(except);
     })
 
     it("项目模块 -> 模块URL", function() {
         var root = 'http://honey.hunantv.com/i/js/';
         var mod = 'mod_login';
+        var config = {
+            pub: 'http://honey.hunantv.com/honey-2.0/',
+            root: 'http://honey.hunantv.com/i/js/'
+        };
         var except = {"name": "mod_login", "path": root +"mod/login.js"};
 
-        var result = parser.modToUrl(mod);
+        var result = parser.modToUrl(mod, config);
         result.should.eql(except);
     })
 });

@@ -20,7 +20,9 @@
         "jade": "",
         "dispatch": "",
         "underscore": "",
-        "underscore.string": ""
+        "underscore.string": "",
+        "request": "",
+        "q": ""
     },
     "devDependencies": {
         "should": "",
