@@ -23,7 +23,8 @@
         "underscore.string": "",
         "request": "",
         "q": "",
-        "async": ""
+        "async": "",
+        "uglify-js": ""
     },
     "devDependencies": {
         "should": "",

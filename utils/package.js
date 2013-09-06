@@ -8,11 +8,9 @@
 'use strict'
 
 var request = require('request')
-var fs = require('fs')
-var path = require('path')
-var _s = require('underscore.string')
 var q = require('q')
 var async = require('async')
+var UglifyJS = require("uglify-js")
 
 function concatMods(_mods) {
     var 
@@ -21,7 +19,10 @@ function concatMods(_mods) {
         request(_mod.path, function(_err, _res, _body) {
             //if (/jquery/.test(_mod.path))
             //    _body = '';
-            _callback(_err, _body) 
+            var result = UglifyJS.minify(_body, {
+                fromString: true
+            })
+            _callback(_err, result.code) 
         })
     } 
 
