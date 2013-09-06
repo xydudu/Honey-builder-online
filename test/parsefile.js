@@ -3,8 +3,6 @@
 var parser = require('../utils/parsefile');
 var path = require('path');
 var should = require('should');
-var fs = require('fs');
-
 
 describe("取模块列表", function () {
     it("取到模块列表 --- 类型 1", function () {
@@ -57,15 +55,16 @@ describe("取模块列表", function () {
     });
 });
 
+
+
 describe("取模块URL", function () {
-    it("读honey配置，取模块路径", function() {
+    it("读honey配置，取模块路径", function(done) {
+        this.timeout(5000);
         var test_file = path.resolve('./test/example/y/index.php');
-        var except = {
-            pub: 'http://honey.hunantv.com/honey-2.0/',
-            root: 'http://honey.hunantv.com/i/js/'
-        };
         parser.getConfigs(test_file).then(function(config) {
-            config.should.eql(except);
+            config.should.have.property('pub', 'http://honey.hunantv.com/honey-2.0/');
+            config.should.have.property('root', 'http://honey.hunantv.com/i/js');
+            done();
         });
 
     });

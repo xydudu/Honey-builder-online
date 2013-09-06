@@ -16,6 +16,10 @@ Honey builder online system, only work with Honey
     - [ ] 页面中存在多个 honey.go 的情况，如何处理？
 
 - [ ] 合并相应模块
+    
+    - [ ✓ ] 取得模块源码
+    - [ ] 压缩模块源码
+
 - [ ] 替换页面相应代码
 - [ ] 更新文件，上线
 

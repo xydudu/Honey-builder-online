@@ -22,7 +22,8 @@
         "underscore": "",
         "underscore.string": "",
         "request": "",
-        "q": ""
+        "q": "",
+        "async": ""
     },
     "devDependencies": {
         "should": "",

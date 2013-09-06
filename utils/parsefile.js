@@ -46,7 +46,7 @@ function modToUrl(_mod, _config) {
     }
 }
 
-function getConfigs(_file) {
+function getConfigs(_file, _callback) {
     //http://honey.hunantv.com/honey-2.0/honey.ihunantv.js
     
     var 
@@ -64,8 +64,8 @@ function getConfigs(_file) {
         if (!error && response.statusCode == 200) {
             /ROOT="(.+?)".*PUBROOT="(.+?)"/gi.test(_body)
             //_callback({root: RegExp.$1, pub: RegExp.$2})
-            //deferred.resolve({root: RegExp.$1, pub: RegExp.$2})
             deferred.resolve({root: RegExp.$1, pub: RegExp.$2})
+            //deferred.resolve({root: RegExp.$1, pub: RegExp.$2})
         } else {
             throw new Error('找不到配置文件')   
         }
@@ -76,17 +76,3 @@ function getConfigs(_file) {
 exports.getModules = getModules
 exports.modToUrl = modToUrl
 exports.getConfigs = getConfigs
-//
-//var test_file = path.resolve('./test/example/x/a.php')
-//var mods = getConfigs(test_file).then(function(v) {
-//    //console.log(v)
-//    return v
-//})
-
-//console.log(mods)
-//setTimeout(function() {
-//    console.log(mods)
-//}, 1000)
-//setTimeout(function() {
-//    console.log(mods)
-//}, 2000)
