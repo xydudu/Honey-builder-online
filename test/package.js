@@ -6,7 +6,7 @@ var fs = require('fs');
 
 describe("合并模块", function () {
     it("模块列表 -> 取模块文件内容", function (done) {
-        this.timeout(5000);
+        this.timeout(15000);
         var pub = 'http://honey.hunantv.com/honey-2.0/';
         var root = 'http://honey.hunantv.com/i/js/';
         var mods = [

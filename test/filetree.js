@@ -11,6 +11,9 @@ describe("file tree", function () {
             {path: path.resolve('./test/example/y/index.php'), name: 'index.php'},
             {path: path.resolve('./test/example/y/more-go.php'), name: 'more-go.php'}
         ];
-        file_arr.should.eql(except);
+        file_arr.should.includeEql(except[0]);
+        file_arr.should.includeEql(except[1]);
+        file_arr.should.includeEql(except[2]);
+        file_arr.should.includeEql(except[3]);
     });
 });
