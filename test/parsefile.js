@@ -54,6 +54,29 @@ describe("取模块列表", function () {
         var mods = parser.getModules(test_file);
         mods.should.eql(except);
     });
+
+    it("存在多个honey.go", function() {
+        var test_file = path.resolve('./test/example/y/more-go.php');
+        var except = [
+            "lib:jquery",
+            "mod_alert",
+            "mod:dialog",
+            "mod_signature",
+            "mod_zoom",
+            "mod_photo",
+            "mod_video",
+            "mod_page",
+            "mod_lazyload",
+            "mod_slide",
+            "mod_ad",
+            "mod_change",
+            "mod_share",
+            "mod_gototop"
+        ];
+        var mods = parser.getModules(test_file);
+        mods.should.eql(except);
+    
+    });
 });
 
 

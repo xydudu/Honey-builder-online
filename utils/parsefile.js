@@ -17,18 +17,27 @@ var q = require('q')
 function getModules(_file) {
     var 
     content = fs.readFileSync(_file, 'utf8'),
-    regexp = /[honey|HN]\.go\(["|'](.+?)["|'],.*?function/gi
+    regexp = /[honey|HN]\.go\(["|'](.+?)["|'],.*?function/gi,
+    result = []
 
     content = content.replace(/["|'](\s+)?\+(\s+)?["|']/gi, '')
 
-    var result = regexp.test(content)
-    if (result) {
-        result = RegExp.$1.split(',').map(function(_item) {
+    while(regexp.test(content)) {
+        result = result.concat(RegExp.$1.split(',').map(function(_item) {
             return _s.trim(_item)
-        })
-    } else result = []
+        }))
+        content = content.replace(RegExp.$1, '')
+    }
 
-    return result
+    //var result = regexp.test(content)
+
+    //if (result) {
+    //    result = RegExp.$1.split(',').map(function(_item) {
+    //        return _s.trim(_item)
+    //    })
+    //} else result = []
+
+    return _.uniq(result)
 }
 
 function modToUrl(_mod, _config) {
@@ -88,3 +97,7 @@ exports.getModules = getModules
 exports.modToUrl = modToUrl
 exports.getConfigs = getConfigs
 exports.encodeFile = encodeFile
+
+//var test_file = path.resolve('./test/example/y/more-go.php');
+//var mods = getModules(test_file);
+//console.log(mods);

@@ -8,7 +8,8 @@ describe("file tree", function () {
         var except = [
             {path: path.resolve('./test/example/x/a.php'), name: 'a.php'},  
             {path: path.resolve('./test/example/x/b.php'), name: 'b.php'},  
-            {path: path.resolve('./test/example/y/index.php'), name: 'index.php'}
+            {path: path.resolve('./test/example/y/index.php'), name: 'index.php'},
+            {path: path.resolve('./test/example/y/more-go.php'), name: 'more-go.php'}
         ];
         file_arr.should.eql(except);
     });
