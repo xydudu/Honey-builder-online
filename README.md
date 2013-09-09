@@ -1,4 +1,5 @@
-Honey-builder-online
+Honey-builder-online 
+[![Build Status](https://secure.travis-ci.org/xydudu/Honey-builder-online.png?branch=master)](https://travis-ci.org/xydudu/Honey-builder-online)
 ====================
 
 Honey builder online system, only work with Honey
