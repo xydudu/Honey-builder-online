@@ -13,7 +13,7 @@ Honey builder online system, only work with Honey
     
     - [ ✓ ] 取到模块名数组
     - [ ✓ ] 取到模块所在URL数组
-    - [ ✓ ] 页面中存在多个 honey.go 的情况，如何处理？
+    - [ ✓ ] 页面中存在多个 honey.go 的情况，如何处理
 
 - [ ✓ ] 合并相应模块
     
