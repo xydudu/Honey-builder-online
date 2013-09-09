@@ -9,11 +9,13 @@ describe("file tree", function () {
             {path: path.resolve('./test/example/x/a.php'), name: 'a.php'},  
             {path: path.resolve('./test/example/x/b.php'), name: 'b.php'},  
             {path: path.resolve('./test/example/y/index.php'), name: 'index.php'},
-            {path: path.resolve('./test/example/y/more-go.php'), name: 'more-go.php'}
+            {path: path.resolve('./test/example/y/more-go.php'), name: 'more-go.php'},
+            {path: path.resolve('./test/example/y/three-go.php'), name: 'three-go.php'}
         ];
         file_arr.should.includeEql(except[0]);
         file_arr.should.includeEql(except[1]);
         file_arr.should.includeEql(except[2]);
         file_arr.should.includeEql(except[3]);
+        file_arr.should.includeEql(except[4]);
     });
 });

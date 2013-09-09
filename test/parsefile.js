@@ -77,6 +77,29 @@ describe("取模块列表", function () {
         mods.should.eql(except);
     
     });
+
+    it("三个honey.go", function() {
+        var test_file = path.resolve('./test/example/y/three-go.php');
+        var except = [
+            "lib:jquery",
+            "mod_page",
+            "mod_alert",
+            "mod:dialog",
+            "mod_signature",
+            "mod_zoom",
+            "mod_photo",
+            "mod_video",
+            "mod_lazyload",
+            "mod_slide",
+            "mod_ad",
+            "mod_change",
+            "mod_share",
+            "mod_gototop"
+        ];
+        var mods = parser.getModules(test_file);
+        mods.should.eql(except);
+    
+    });
 });
 
 
@@ -167,4 +190,45 @@ describe("替换合并后模块至页面", function() {
         });
 
     });
+    it('存在多个honey.go', function(done) {
+        var mod_name = [
+                "lib:jquery",
+                "plugin:pswencode",
+                "mod:dialog",
+                "mod_suggestion",
+                "mod_login"
+            ].join('-');
+        var input = path.resolve('./test/example/y/more-go.php');
+        var output = path.resolve('./test/parsed/more-go.php');
+        
+        parser.encodeFile(input, mod_name, output, function(_err) {
+            should.not.exist(_err);
+            fs.existsSync(output).should.be.true;
+            fs.readFileSync(output, 'utf8').should.match(/lib:jquery-plugin:pswencode/);
+            done();
+        });
+
+    });
+
+    it('3个honey.go', function(done) {
+        var mod_name = [
+                "lib:jquery",
+                "plugin:pswencode",
+                "mod:dialog",
+                "mod_suggestion",
+                "mod_login"
+            ].join('-');
+        var input = path.resolve('./test/example/y/three-go.php');
+        var output = path.resolve('./test/parsed/three-go.php');
+        
+        parser.encodeFile(input, mod_name, output, function(_err) {
+            should.not.exist(_err);
+            fs.existsSync(output).should.be.true;
+            fs.readFileSync(output, 'utf8').should.match(/lib:jquery-plugin:pswencode/);
+            done();
+        });
+
+    });
+
+
 });
