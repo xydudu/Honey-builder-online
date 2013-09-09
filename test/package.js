@@ -14,6 +14,8 @@ describe("合并模块", function () {
             {"name": "mod_login", "path": root +"mod/login.js"}
         ];
         pack.concatMods(mods).then(function (_sources) {
+            console.log(_sources.name)
+            console.log(_sources.source.length)
             _sources.name.should.equal('lib:jquery-mod_login');
             _sources.source.should.match(/checkaccount/);
             done();
