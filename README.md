@@ -1,5 +1,4 @@
-Honey-builder-online 
-[![Build Status](https://secure.travis-ci.org/xydudu/Honey-builder-online.png?branch=master)](https://travis-ci.org/xydudu/Honey-builder-online)
+Honey-builder-online [![Build Status](https://secure.travis-ci.org/xydudu/Honey-builder-online.png?branch=master)](https://travis-ci.org/xydudu/Honey-builder-online)
 ====================
 
 Honey builder online system, only work with Honey
@@ -21,7 +20,7 @@ Honey builder online system, only work with Honey
     - [ ✓ ] 取得模块源码
     - [ ✓ ] 压缩模块源码
 
-- [ ] 替换页面相应代码
+- [ ✓ ] 替换页面相应代码
 - [ ] 更新文件，上线
 
 

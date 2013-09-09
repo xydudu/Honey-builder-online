@@ -3,6 +3,7 @@
 var parser = require('../utils/parsefile');
 var path = require('path');
 var should = require('should');
+var fs = require('fs');
 
 describe("取模块列表", function () {
     it("取到模块列表 --- 类型 1", function () {
@@ -93,4 +94,54 @@ describe("取模块URL", function () {
         var result = parser.modToUrl(mod, config);
         result.should.eql(except);
     })
+});
+
+describe("替换合并后模块至页面", function() {
+    it('只有一个honey.go', function(done) {
+        var mod_name = [
+            "lib:jquery",
+            "mod:dialog",
+            "mod_alert",
+            "mod_signature",
+            "mod_zoom",
+            "mod_photo",
+            "mod_video",
+            "mod_page",
+            "mod_lazyload",
+            "mod_slide",
+            "mod_ad",
+            "mod_change",
+            "mod_share",
+            "mod_gototop"
+        ].join('-');
+        var input = path.resolve('./test/example/y/index.php');
+        var output = path.resolve('./test/parsed/index.php');
+        
+        parser.encodeFile(input, mod_name, output, function(_err) {
+            should.not.exist(_err);
+            fs.existsSync(output).should.be.true;
+            fs.readFileSync(output, 'utf8').should.match(/lib:jquery-mod:dialog/);
+            done();
+        });
+
+    });
+    it('honey.go 形式', function(done) {
+        var mod_name = [
+                "lib:jquery",
+                "plugin:pswencode",
+                "mod:dialog",
+                "mod_suggestion",
+                "mod_login"
+            ].join('-');
+        var input = path.resolve('./test/example/x/b.php');
+        var output = path.resolve('./test/parsed/b.php');
+        
+        parser.encodeFile(input, mod_name, output, function(_err) {
+            should.not.exist(_err);
+            fs.existsSync(output).should.be.true;
+            fs.readFileSync(output, 'utf8').should.match(/lib:jquery-plugin:pswencode/);
+            done();
+        });
+
+    });
 });

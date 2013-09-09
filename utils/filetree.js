@@ -18,6 +18,7 @@ function getTree(_path, _arr) {
     tree = fs.readdirSync(_path)
         .filter(function(_file) {
             if (/^\./.test(_file)) return false
+            if (/\.(js|png|jpeg|css|gif)$/.test(_file)) return false
             return true
         }) 
         .map(function(_file) {

@@ -10,6 +10,7 @@
 var request = require('request')
 var fs = require('fs')
 var path = require('path')
+var _ = require('underscore')
 var _s = require('underscore.string')
 var q = require('q')
 
@@ -19,13 +20,8 @@ function getModules(_file) {
     regexp = /[honey|HN]\.go\(["|'](.+?)["|'],.*?function/gi
 
     content = content.replace(/["|'](\s+)?\+(\s+)?["|']/gi, '')
-    
-    //var result = content.match(regexp)
-    var result = regexp.test(content)
-    //var result = content.replace(regexp, '') 
 
-    //console.log(result)
-    //console.log(RegExp.$1)
+    var result = regexp.test(content)
     if (result) {
         result = RegExp.$1.split(',').map(function(_item) {
             return _s.trim(_item)
@@ -47,8 +43,6 @@ function modToUrl(_mod, _config) {
 }
 
 function getConfigs(_file, _callback) {
-    //http://honey.hunantv.com/honey-2.0/honey.ihunantv.js
-    
     var 
     deferred = q.defer(),
     content = fs.readFileSync(_file, 'utf8'),
@@ -73,6 +67,24 @@ function getConfigs(_file, _callback) {
     return deferred.promise
 }
 
+function encodeFile(_input, _name, _output, _callback) {
+    if (_.isFunction(_output)) {
+        _callback = _output
+        _output = _input
+    }
+    
+    var 
+    content = fs.readFileSync(_input, 'utf8'),
+    regexp = /(.+[honey|HN]\.go\(["|'])(.+?)(["|'],.*?function.+)/gi
+
+    content = content.replace(/["|'](\s+)?\+(\s+)?["|']/gi, '')
+    content = content.replace(regexp, "$1"+ _name +"$3")
+    
+    fs.writeFile(_output, content, 'utf8', _callback) 
+    
+}
+
 exports.getModules = getModules
 exports.modToUrl = modToUrl
 exports.getConfigs = getConfigs
+exports.encodeFile = encodeFile
