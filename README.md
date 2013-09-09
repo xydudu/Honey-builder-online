@@ -20,7 +20,7 @@ Honey builder online system, only work with Honey
     - [ ✓ ] 取得模块源码
     - [ ✓ ] 压缩模块源码
 
-- [ ] 替换页面相应代码
+- [ ✓ ] 替换页面相应代码
     - [ ✓ ] 只存在一个honey.go
     - [ ✓ ] 页面中存在多个 honey.go 的情况
 
