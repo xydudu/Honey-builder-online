@@ -9,29 +9,44 @@
 
 var request = require('request')
 var q = require('q')
+var fs = require('fs');
 var async = require('async')
 var UglifyJS = require("uglify-js")
+var _ = require('underscore')
 
 function concatMods(_mods) {
     var 
     deferred = q.defer(),
     getSource = function(_mod, _callback) {
         request(_mod.path, function(_err, _res, _body) {
-            //if (/jquery/.test(_mod.path))
-            //    _body = '';
             var result = UglifyJS.minify(_body, {
                 fromString: true
             })
-            _callback(_err, result.code) 
+            _callback(_err, {name: _mod.name, code: result.code}) 
         })
     } 
 
     async.map(_mods, getSource, function(_err, _results){
-        _results = _results.join(';')
-        deferred.resolve(_results) 
+        var names = [], sources = []
+        while(_results.length) {
+            var mod = _results.shift()
+            names.push(mod.name)
+            sources.push(mod.code)
+        }
+        deferred.resolve({name: names.join('-'), source: sources.join(';')}) 
     })
 
     return deferred.promise
 }
 
+function writeFile(_path, _source) {
+    var 
+    deferred = q.defer(),
+    filename = _path +'/'+ _source.name +'.js'
+
+    fs.writeFile(filename, _source.source, 'utf-8', deferred.resolve) 
+    return deferred.promise
+}
+
 exports.concatMods = concatMods
+exports.writeFile = writeFile
