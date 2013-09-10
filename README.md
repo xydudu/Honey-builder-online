@@ -40,7 +40,7 @@ Honey builder online system, only work with Honey
 
 - [] Honey Builder Center
     
-    - [] Event lister
+    - [] Event listener
     - [] Create project build directory
     - [] Save file to project build directory
 
