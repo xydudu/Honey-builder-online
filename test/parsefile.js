@@ -105,12 +105,13 @@ describe("取模块列表", function () {
 
 
 describe("取模块URL", function () {
-    it("读honey配置，取模块路径", function(done) {
+    it("读honey配置，取模块路径和项目名", function(done) {
         this.timeout(15000);
         var test_file = path.resolve('./test/example/y/index.php');
         parser.getConfigs(test_file).then(function(config) {
             config.should.have.property('pub', 'http://honey.hunantv.com/honey-2.0/');
             config.should.have.property('root', 'http://honey.hunantv.com/i/js');
+            config.should.have.property('project_name', 'i.hunantv');
             done();
         });
 

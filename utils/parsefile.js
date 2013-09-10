@@ -29,14 +29,6 @@ function getModules(_file) {
         content = content.replace(RegExp.$1, '')
     }
 
-    //var result = regexp.test(content)
-
-    //if (result) {
-    //    result = RegExp.$1.split(',').map(function(_item) {
-    //        return _s.trim(_item)
-    //    })
-    //} else result = []
-
     return _.uniq(result)
 }
 
@@ -65,12 +57,17 @@ function getConfigs(_file, _callback) {
     
     request(honey_source, function (error, response, _body) {
         if (!error && response.statusCode == 200) {
-            /ROOT="(.+?)".*PUBROOT="(.+?)"/gi.test(_body)
-            //_callback({root: RegExp.$1, pub: RegExp.$2})
-            deferred.resolve({root: RegExp.$1, pub: RegExp.$2})
-            //deferred.resolve({root: RegExp.$1, pub: RegExp.$2})
+
+            if (/PROJECT="(.+?)".*ROOT="(.+?)".*PUBROOT="(.+?)"/gi.test(_body))
+                deferred.resolve({
+                    project_name: RegExp.$1,
+                    root: RegExp.$2, 
+                    pub: RegExp.$3,
+                    file: _file
+                })
+            else throw new Error('找不到配置文件')
         } else {
-            throw new Error('找不到配置文件')   
+            throw new Error('找不到配置文件')
         }
     })
     return deferred.promise

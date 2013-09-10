@@ -19,10 +19,20 @@ function concatMods(_mods) {
     deferred = q.defer(),
     getSource = function(_mod, _callback) {
         request(_mod.path, function(_err, _res, _body) {
-            var result = UglifyJS.minify(_body, {
-                fromString: true
-            })
-            _callback(_err, {name: _mod.name, code: result.code}) 
+            var result = _body
+            if (_res.statusCode > 400) {
+                result = '/* '+ _mod.path +' 404 */'
+                _callback(_err, {name: _mod.name, code: result}) 
+                return
+            }
+            try {
+                var result = UglifyJS.minify(_body, {
+                    fromString: true
+                }).code
+            } catch(_e) {
+                
+            }
+            _callback(_err, {name: _mod.name, code: result}) 
         })
     } 
 

@@ -20,6 +20,20 @@ describe("合并模块", function () {
         });
     });
 
+    it("取模块文件内容404情况", function (done) {
+        this.timeout(15000);
+        var pub = 'http://honey.hunantv.com/honey-2.0/';
+        var root = 'http://honey.hunantv.com/i/js/';
+        var mods = [
+            {"name": "mod_login", "path": root +"mod/login11.js"}
+        ];
+        pack.concatMods(mods).then(function (_sources) {
+            _sources.name.should.equal('mod_login');
+            _sources.source.should.match(/404/);
+            done();
+        });
+    });
+
     it('合并压缩模块到一个文件中', function(done) {
         this.timeout(25000);
 
