@@ -34,7 +34,21 @@ Honey builder online system, only work with Honey
 
 - [ ] 更新文件，上线
 
+---
 
+### Web Interface TODO
+
+- [] Honey Builder Center
+    
+    - [] Event lister
+    - [] Create project build directory
+    - [] Save file to project build directory
+
+- [] Honey Builder Client
+    
+    - [] Initialize page
+    - [] Save config to JSON locally
+    - [] List files where the project view directory configured
 
 ---
 
