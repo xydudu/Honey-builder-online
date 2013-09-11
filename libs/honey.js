@@ -10,25 +10,17 @@
 var 
 q = require('q'),
 _ = require('underscore'),
+_s = require('underscore.string'),
+path = require('path'),
 parser = require('../utils/parsefile'),
 packer = require('../utils/package'),
-tree = require('../utils/filetree')
+tree = require('../utils/filetree'),
+global_config = require('../configs.json')
 
 
-function concatMods(_config) {
-    var mods = getModList(_config)
-    return [_config, packer.concatMods(mods)]
-}
-
-function getModList(_config) {
-    var 
-    mods = parser.getModules(_config.file),
-    mod_list = [] 
-    while(mods.length) {
-        var mod = mods.shift()
-        mod_list.push(parser.modToUrl(mod, _config))
-    }
-    return mod_list
+function getPath(_sources) {
+    var js_path = global_config.js_path || path.resolve('./test/parsed/')
+    return [js_path +'/'+ _sources.project_name +'/', _sources]
 }
 
 function build(_file, _options, _callback) {
@@ -61,7 +53,28 @@ function build(_file, _options, _callback) {
     
 }
 
+function saveJS(_options, _callback) { 
+    var 
+    mods = _options.mods.split(','),
+    config = _options,
+    mod_list = []
+
+    while (mods.length) {
+        var mod = _s.trim(mods.shift())
+        mod_list.push(parser.modToUrl(mod, config))
+    }
+    packer.concatMods(mod_list)
+        .then(function(_sources) {
+            _sources.project_name = config.project_name
+            return _sources
+        })
+        .then(getPath)
+        .spread(packer.writeFile)
+        .then(_callback)
+}
+
 exports.build = build
+exports.saveJS = saveJS
 
 //var test_file = require('path').resolve('./test/parsed/a.php');
 //build(test_file)

@@ -19,7 +19,7 @@ Honey builder online system, only work with Honey
 - [ ✓ ] 合并相应模块
     
     - [ ✓ ] 取得模块源码
-    - [  ] 404 情况
+    - [ ✓ ] 404 情况
     - [ ✓ ] 压缩模块源码
 
 - [ ✓ ] 替换页面相应代码
@@ -32,17 +32,16 @@ Honey builder online system, only work with Honey
 
 - [  ] 融合各步骤，实现合并命令 honey('a.php')
 
-- [ ] 更新文件，上线
 
 ---
 
 ### Web Interface TODO
 
-- [] Honey Builder Center
+- [ ✓ ] Honey Builder Center
     
-    - [] Event listener
-    - [] Create project build directory
-    - [] Save file to project build directory
+    - [ ✓ ] Event listener
+    - [ ✓ ] Create project build directory
+    - [ ✓ ] Save file to project build directory
 
 - [] Honey Builder Client
     

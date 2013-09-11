@@ -47,4 +47,20 @@ describe("合并模块", function () {
             });
         
     });
+
+    it('保存文件时需要建立项目文件夹', function(done) {
+
+        this.timeout(25000);
+
+        var source = {name: 'lib:jquery-mod:login', source: 'var a=1;console.log(a);'};
+
+        var build_path = path.resolve('./test/parsed/i.hunantv/');
+
+        var file = pack.writeFile(build_path, source)
+            .then(function(err) {
+                should.not.exist(err); 
+                fs.existsSync('./test/parsed/i.hunantv/'+ source.name +'.js').should.be.true;
+                done();
+            });
+    });
 });

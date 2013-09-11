@@ -54,6 +54,10 @@ function writeFile(_path, _source) {
     deferred = q.defer(),
     filename = _path +'/'+ _source.name +'.js'
 
+    if (!fs.existsSync(_path)) {
+        fs.mkdirSync(_path)
+    }
+
     fs.writeFile(filename, _source.source, 'utf8', deferred.resolve) 
     return deferred.promise
 }
