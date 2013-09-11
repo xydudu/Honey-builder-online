@@ -1,7 +1,7 @@
+configs.json
 node_modules
 lib-cov
 .svn
-configs.json
 
 *.seed
 *.log
