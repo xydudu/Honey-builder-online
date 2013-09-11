@@ -23,6 +23,7 @@ function getModules(_file) {
     content = content.replace(/["|'](\s+)?\+(\s+)?["|']/gi, '')
 
     while(regexp.test(content)) {
+        if (RegExp.$1.indexOf('#') > 0) return result
         result = result.concat(RegExp.$1.split(',').map(function(_item) {
             return _s.trim(_item)
         }))
