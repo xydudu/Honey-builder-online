@@ -1,10 +1,16 @@
 var exec = require('child_process').exec;
 var should = require('should');
 var center_server = require('../web/center/app').server;
+var client_server = require('../web/client/app').server;
 var request = require('request');
+var path = require('path');
+var fs = require('fs');
 
 
+
+/*
 describe("Center web interface", function () {
+
     var app;
     before(function() {
         app = center_server(3000);
@@ -44,5 +50,73 @@ describe("Center web interface", function () {
         });
     });
 });
+*/
+
+describe("Client web interface", function () {
+    var app;
+    var url = 'http://localhost:3001/';
+    var config_path = path.resolve('./configs.json');
+    var config_bak_path = path.resolve('./_configs.json');
+
+    before(function() {
+        app = client_server(3001);
+
+    })
+    after(function() {
+        app.close();
+    })
+    describe("Http methods", function () {
+        it("client hello world", function (done) {
+            request(url, function(_err, _res, _body) {
+                should.not.exist(_err);
+                _res.should.have.status(200);
+                done();
+            });
+        });
+    });
+        
+    describe("No configs", function() {
+
+        before(function(done) {
+            // backend configs.json
+            var cp = fs.createWriteStream(config_bak_path);
+            fs.createReadStream(config_path).pipe(cp);
+            cp.on('finish', function() {
+                fs.writeFile(config_path, "{}", 'utf8', done);
+            });
+        });
+
+        after(function(done) {
+            var cp = fs.createWriteStream(config_path);
+            fs.createReadStream(config_bak_path).pipe(cp);
+            cp.on('finish', function() {
+                fs.unlink(config_bak_path, done);
+            });
+        });
+    
+        it("should redirect to setting page", function (done) {
+            request(url, function(_err, _res, _body) {
+                _body.should.match(/setting/);
+                done();
+            });
+        });
+        it("save settings to configs.json", function (done) {
+            var project_view_path = __dirname +'/example/';
+            request.post({
+                url: url +'setting',
+                form: {
+                    project_view_path: project_view_path
+                }
+            }, function(_err, _res, _body) {
+                should.not.exist(_err);
+                _body.should.equal('1');
+                fs.readFileSync(__dirname +'/../configs.json').should.match(/project_view_path/);
+                done()
+            });
+
+        });
+       
+    });
 
 
+});

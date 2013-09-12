@@ -25,12 +25,12 @@ Honey builder online system, only work with Honey
 - [ ✓ ] 替换页面相应代码
     - [ ✓ ] 只存在一个honey.go
     - [ ✓ ] 页面中存在多个 honey.go 的情况
-    - [  ] 已parsed的情况，重复parsed问题
+    - [ ✓ ] 已parsed的情况，重复parsed问题
 
 - [  ] 识别已合并页
 - [  ] 还原已合并页
 
-- [  ] 融合各步骤，实现合并命令 honey('a.php')
+- [ ✓ ] 融合各步骤，实现合并命令 honey('a.php')
 
 
 ---

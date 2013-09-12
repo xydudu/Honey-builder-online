@@ -1,0 +1,19 @@
+doctype 5
+html
+  head
+    title= title
+  body
+    h1= title
+    h2 请先进行项目初始设置
+    form#setting(action='/setting', method="POST")
+      p
+        lable 项目模块目录
+        input(
+          name="project_view_path", 
+          type="text",
+          style="margin-left:2em; padding: 1em; width: 300px", placeholder="填入绝对路径")
+      p
+        input(type="submit", value="保存")
+    hr
+    footer
+      p Honey Lab 2013

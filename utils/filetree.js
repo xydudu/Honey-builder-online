@@ -35,4 +35,10 @@ function getTree(_path, _arr) {
     return arr
 }
 
+function saveConfigs(_data, _callback) {
+    var config = __dirname +'/../configs.json';
+    fs.writeFile(config, JSON.stringify(_data), 'utf8', _callback) 
+}
+
 exports.getTree = getTree
+exports.saveConfigs = saveConfigs
