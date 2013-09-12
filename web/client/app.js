@@ -18,21 +18,32 @@ configs = require('../../configs.json')
 
 var router = dispatch({
     '/': function(req, res) {
-        if (!configs.project_views) {
+        if (!configs.project_view_path) {
             res.render('setting', {})
         } else {
-            res.end('Honey Builder Client //honey lab')
+            var filelist = filetree.getTree(configs.project_view_path)
+            res.render('filelist', {
+                filelist: filelist,
+                path: configs.project_view_path
+            })
         }
     },
     '/setting': {
         'POST': function(req, res) {
+            var back = function (_msg) {
+                return _msg +' <a href="/" > [ Back ] </a>'
+            }
+            res.writeHead(200, {'Content-Type': 'text/html'});
             if (req.body) {
                 
                 filetree.saveConfigs(req.body, function(_err) {
-                    res.end(_err ? '0' : '1')
+                    delete require.cache[require.resolve('../../configs.json')]
+
+                    configs = require('../../configs.json')
+                    res.end(back(_err ? 'Error' : 'Ok'))
                 })  
             
-            } else res.end('0')  
+            } else res.end(back('Error'))  
         },
         'GET': function(req, res) {
             res.end('Honey Builder Client //honey lab')

@@ -1,0 +1,17 @@
+doctype 5
+html
+  head
+    title= title
+  body
+    h1= title
+    h2 文件列表 (目录：#{ path })
+    #list
+      ul(style="list-style:none;margin:0;padding:0")
+        each file in filelist
+          li(style="padding:.5em;border-bottom:1px solid #efefef") 
+            button 压缩
+            span(style="color:red;font-weight:800;font-size:1.5em;margin:0 1em;")= file.name
+            |  (#{ file.path.replace(path, '') })
+    hr
+    footer
+      p Honey Lab 2013

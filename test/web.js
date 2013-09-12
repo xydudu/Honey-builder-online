@@ -77,24 +77,14 @@ describe("Client web interface", function () {
 
         before(function(done) {
             // backend configs.json
-            //var cp = fs.createWriteStream(config_bak_path);
             var cp =fs.createReadStream(config_path).pipe(fs.createWriteStream(config_bak_path));
-
-            //cp.on('finish', function() {
-            //    fs.writeFile(config_path, "{}", 'utf8', done);
-            //});
-            
             cp.on('close', function() {
                 fs.writeFile(config_path, "{}", 'utf8', done);
             });
         });
 
         after(function(done) {
-            //var cp = fs.createWriteStream(config_path);
             var cp = fs.createReadStream(config_bak_path).pipe(fs.createWriteStream(config_path));
-            //cp.on('finish', function() {
-            //    fs.unlink(config_bak_path, done);
-            //});
             cp.on('close', function() {
                 fs.unlink(config_bak_path, done);
             });
@@ -115,14 +105,56 @@ describe("Client web interface", function () {
                 }
             }, function(_err, _res, _body) {
                 should.not.exist(_err);
-                _body.should.equal('1');
+                _body.should.match(/Ok/);
                 fs.readFileSync(__dirname +'/../configs.json').should.match(/project_view_path/);
                 done()
             });
-
         });
        
     });
 
+
+    describe("Setting is ready", function() {
+
+        before(function(done) {
+
+            this.timeout(25000);
+
+            app.close();
+            delete require.cache[require.resolve('../configs.json')]
+            delete require.cache[require.resolve('../web/client/app')]
+
+            var project_view_path = __dirname +'/example/';
+            var cp =fs.createReadStream(config_path).pipe(fs.createWriteStream(config_bak_path));
+            cp.on('close', function() {
+                
+                fs.writeFile(
+                    config_path, 
+                    '{"project_view_path": "'+ project_view_path +'"}',
+                    'utf8', done);
+            });
+        });
+
+        after(function(done) {
+            var cp = fs.createReadStream(config_bak_path).pipe(fs.createWriteStream(config_path));
+            cp.on('close', function() {
+                fs.unlink(config_bak_path, done);
+            });
+        });
+
+        it("should list files", function (done) {
+
+            app = require('../web/client/app').server(3001);
+
+            request(url, function(_err, _res, _body) {
+                _body.should.match(/a.php/);
+                _body.should.match(/b.php/);
+                done();
+            });
+        });
+
+    
+    });
+ 
 
 });
