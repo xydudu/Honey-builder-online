@@ -18,7 +18,6 @@
     "dependencies": {
         "connect": "",
         "connect-jade": "",
-        //"jade": "",
         "dispatch": "",
         "quip": "",
         "underscore": "",
