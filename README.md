@@ -45,8 +45,8 @@ Honey builder online system, only work with Honey
 
 - [] Honey Builder Client
     
-    - [] Initialize page
-    - [] Save config to JSON locally
+    - [ ✓ ] Initialize page
+    - [ ✓ ] Save config to JSON locally
     - [] List files where the project view directory configured
 
 ---

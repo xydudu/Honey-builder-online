@@ -8,7 +8,6 @@ var fs = require('fs');
 
 
 
-/*
 describe("Center web interface", function () {
 
     var app;
@@ -50,7 +49,6 @@ describe("Center web interface", function () {
         });
     });
 });
-*/
 
 describe("Client web interface", function () {
     var app;
