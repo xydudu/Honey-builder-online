@@ -77,17 +77,25 @@ describe("Client web interface", function () {
 
         before(function(done) {
             // backend configs.json
-            var cp = fs.createWriteStream(config_bak_path);
-            fs.createReadStream(config_path).pipe(cp);
-            cp.on('finish', function() {
+            //var cp = fs.createWriteStream(config_bak_path);
+            var cp =fs.createReadStream(config_path).pipe(fs.createWriteStream(config_bak_path));
+
+            //cp.on('finish', function() {
+            //    fs.writeFile(config_path, "{}", 'utf8', done);
+            //});
+            
+            cp.on('close', function() {
                 fs.writeFile(config_path, "{}", 'utf8', done);
             });
         });
 
         after(function(done) {
-            var cp = fs.createWriteStream(config_path);
-            fs.createReadStream(config_bak_path).pipe(cp);
-            cp.on('finish', function() {
+            //var cp = fs.createWriteStream(config_path);
+            var cp = fs.createReadStream(config_bak_path).pipe(fs.createWriteStream(config_path));
+            //cp.on('finish', function() {
+            //    fs.unlink(config_bak_path, done);
+            //});
+            cp.on('close', function() {
                 fs.unlink(config_bak_path, done);
             });
         });
