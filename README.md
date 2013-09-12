@@ -47,8 +47,9 @@ Honey builder online system, only work with Honey
     
     - [ ✓ ] Initialize page
     - [ ✓ ] Save config to JSON locally
-    - [] List files where the project view directory configured
+    - [ ✓ ] List files where the project view directory configured
+    - [ ] Do package from file list page 
 
 ---
 
-> 为什么不本地打包呢，唉。。。
+> ... still working on
