@@ -48,7 +48,7 @@ Honey builder online system, only work with Honey
     - [ ✓ ] List files where the project view directory configured
     - [ ✓ ] Remark files if it was parsed already
     - [ ✓ ] Style
-    - [ ] Do package from file list page 
+    - [ ✓ ] Do package from file list page 
 
 ---
 

@@ -23,12 +23,12 @@ html
     #list(style='display:none')
       ul
         | {{#filelist}}
-        li
+        li(id="file-{{showindex}}")
           | {{#isparsed}}
-          button 还 原
+          button#restore(class="index-{{showindex}}") 还 原
           | {{/isparsed}}
           | {{^isparsed}}
-          button 压 缩
+          button#parse(class="index-{{showindex}}") 压 缩
           | {{/isparsed}}
           span.filename {{ name }}
           |  ({{ path }})
@@ -53,10 +53,26 @@ html
     |             async: false,
     |         }).responseText;
     |       }
+    |       var idx = 0;
+    |       function showindex() {
+    |           return idx ++;    
+    |       }
     |       var box = document.getElementById('list');
     |       var tpl = box.innerHTML;
-    |       box.innerHTML = Mustache.render(tpl, {filelist: filelist, isparsed: isParsed});
+    |       box.innerHTML = Mustache.render(tpl, {
+    |          filelist: filelist, isparsed: isParsed, showindex: showindex});
     |       box.style.display = 'block';
+    |       document.getElementById('parse').onclick = function() {
+    |            var i = this.className.split('-')[1];
+    |            var file = filelist[i];
+    |            $.post('/parse', {path: file.path}, function(_res) {
+    |                if (+_res) {
+    |                 alert('完成');
+    |                 $('#file-'+ i).remove();
+    |                } else alert('Error');
+    |            });
+    |           return false;
+    |       }
     |   })
     | </script>      
       
