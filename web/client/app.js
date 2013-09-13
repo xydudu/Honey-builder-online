@@ -28,6 +28,16 @@ var router = dispatch({
             })
         }
     },
+    '/state': function(req, res) {
+        if (!configs.project_view_path) {
+            res.redirect('/')
+        } else {
+            var file_path = req.query.path
+            if (!file_path) return res.end('0')
+            var state = filetree.fileState(file_path)
+            res.end(state ? '1' : '0')
+        }
+    },
     '/setting': {
         'POST': function(req, res) {
             var back = function (_msg) {
@@ -63,6 +73,7 @@ exports.server = function(_port) {
               title: "Honey Build Online System"
             }
         }))
+        .use(connect.query())
         .use(connect.bodyParser())
         .use(connect.static('../assert'))
         .use(router)

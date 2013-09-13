@@ -120,9 +120,9 @@ describe("Client web interface", function () {
 
             this.timeout(25000);
 
-            app.close();
+            //app.close();
             delete require.cache[require.resolve('../configs.json')]
-            delete require.cache[require.resolve('../web/client/app')]
+            //delete require.cache[require.resolve('../web/client/app')]
 
             var project_view_path = __dirname +'/example/';
             var cp =fs.createReadStream(config_path).pipe(fs.createWriteStream(config_bak_path));
@@ -143,9 +143,7 @@ describe("Client web interface", function () {
         });
 
         it("should list files", function (done) {
-
-            app = require('../web/client/app').server(3001);
-
+            //app = require('../web/client/app').server(3001);
             request(url, function(_err, _res, _body) {
                 _body.should.match(/a.php/);
                 _body.should.match(/b.php/);
@@ -153,6 +151,31 @@ describe("Client web interface", function () {
             });
         });
 
+        it("should say file not parsed", function (done) {
+            //app = require('../web/client/app').server(3001);
+            var test_file = path.resolve('./test/example/x/a.php');
+            var api = url +'state?path='+ test_file
+            request(api, function(_err, _res, _body) {
+                console.log(_body)
+                should.not.exist(_err);
+                _body.should.equal('0');
+                done();
+            });
+        });
+
+        it("should say file was parsed already", function (done) {
+            //app = require('../web/client/app').server(3001);
+
+            var test_file = path.resolve('./test/example/x/parsed.php');
+            var api = url +'state?path='+ test_file
+
+            request(api, function(_err, _res, _body) {
+                console.log(_body)
+                should.not.exist(_err);
+                _body.should.equal('1');
+                done();
+            });
+        });
     
     });
  

@@ -2,16 +2,63 @@ doctype 5
 html
   head
     title= title
+    style
+      ul {
+          list-style:none;margin:0;padding:0
+      }
+      li {
+          padding:.5em;border-bottom:1px solid #efefef;
+          font-size: .8em;
+          color: gray;
+      }
+      .filename {
+          color:red;font-weight:800;font-size:1.5em;margin:0 1em;
+      }
+      button {
+        font-size: 1.2em;  
+      }
   body
     h1= title
     h2 文件列表 (目录：#{ path })
-    #list
-      ul(style="list-style:none;margin:0;padding:0")
-        each file in filelist
-          li(style="padding:.5em;border-bottom:1px solid #efefef") 
-            button 压缩
-            span(style="color:red;font-weight:800;font-size:1.5em;margin:0 1em;")= file.name
-            |  (#{ file.path.replace(path, '') })
+    #list(style='display:none')
+      ul
+        | {{#filelist}}
+        li
+          | {{#isparsed}}
+          button 还 原
+          | {{/isparsed}}
+          | {{^isparsed}}
+          button 压 缩
+          | {{/isparsed}}
+          span.filename {{ name }}
+          |  ({{ path }})
+        | {{/filelist}}
     hr
     footer
       p Honey Lab 2013
+    script(src="http://honey.hunantv.com/honey-2.0/honey.newhunantv.js")
+    | <script>
+    |   var filelist = [];
+
+    - each file in filelist
+      |  filelist.push({name: "#{file.name}", path: "#{file.path}"});
+      
+
+    |   honey.go('lib:jquery,lib:mustache', function() {
+    |       function isParsed() {
+    |         var api = '/state?path='+ this.path;
+    |         return ~~$.ajax({
+    |             type: "GET",
+    |             url: api,
+    |             async: false,
+    |         }).responseText;
+    |       }
+    |       var box = document.getElementById('list');
+    |       var tpl = box.innerHTML;
+    |       box.innerHTML = Mustache.render(tpl, {filelist: filelist, isparsed: isParsed});
+    |       box.style.display = 'block';
+    |   })
+    | </script>      
+      
+
+

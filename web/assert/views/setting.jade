@@ -2,18 +2,37 @@ doctype 5
 html
   head
     title= title
+    style
+      #setting {
+        color: red;
+      }
+      .button {
+        font-size: 1.2em;  
+      }
   body
     h1= title
     h2 请先进行项目初始设置
     form#setting(action='/setting', method="POST")
       p
-        lable 项目模块目录
+        label 项目文件夹DIR
         input(
           name="project_view_path", 
           type="text",
           style="margin-left:2em; padding: 1em; width: 300px", placeholder="填入绝对路径")
       p
-        input(type="submit", value="保存")
+        label 项目服务端API
+        input(
+          name="client", 
+          type="text",
+          style="margin-left:2em; padding: 1em; width: 300px", value="http://localhost:3001/")
+      p
+        label 中心服务端API
+        input(
+          name="center", 
+          type="text",
+          style="margin-left:2em; padding: 1em; width: 300px", value="http://honey.hunantv.com:3000/")
+      p
+        input.button(type="submit", value=" 保 存 ")
     hr
     footer
       p Honey Lab 2013

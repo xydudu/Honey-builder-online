@@ -40,5 +40,11 @@ function saveConfigs(_data, _callback) {
     fs.writeFile(config, JSON.stringify(_data), 'utf8', _callback) 
 }
 
+function fileState(_path) {
+    var result = /(honey|HN|H)\.go\(['|"](.+)#([\S\-]+)/.test(fs.readFileSync(_path))
+    return result
+}
+
 exports.getTree = getTree
 exports.saveConfigs = saveConfigs
+exports.fileState = fileState

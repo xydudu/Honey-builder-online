@@ -26,9 +26,7 @@ Honey builder online system, only work with Honey
     - [ ✓ ] 只存在一个honey.go
     - [ ✓ ] 页面中存在多个 honey.go 的情况
     - [ ✓ ] 已parsed的情况，重复parsed问题
-
-- [  ] 识别已合并页
-- [  ] 还原已合并页
+    - [  ] 还原已合并页
 
 - [ ✓ ] 融合各步骤，实现合并命令 honey('a.php')
 
@@ -48,6 +46,8 @@ Honey builder online system, only work with Honey
     - [ ✓ ] Initialize page
     - [ ✓ ] Save config to JSON locally
     - [ ✓ ] List files where the project view directory configured
+    - [ ✓ ] Remark files if it was parsed already
+    - [ ✓ ] Style
     - [ ] Do package from file list page 
 
 ---
