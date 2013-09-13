@@ -12,6 +12,7 @@ connect = require('connect'),
 dispatch = require('dispatch'),
 connectJade = require('connect-jade'),
 filetree = require('../../utils/filetree'),
+parser = require('../../utils/parsefile'),
 honey = require('../../index'),
 
 configs = require('../../configs.json')
@@ -37,6 +38,19 @@ var router = dispatch({
             var state = filetree.fileState(file_path)
             res.end(state ? '1' : '0')
         }
+    },
+    '/parse': {
+        'POST': function(req, res) {
+            if (req.body) {
+                var file = req.body.path 
+                honey.build(file, function(_err) {
+                    res.end(_err ? '0' : '1')
+                })
+            } else res.end('0')  
+        },
+        'GET': function(req, res) {
+            res.end('Honey Builder Client //honey lab')
+        } 
     },
     '/setting': {
         'POST': function(req, res) {

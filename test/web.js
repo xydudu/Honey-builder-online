@@ -164,10 +164,9 @@ describe("Client web interface", function () {
         });
 
         it("should say file was parsed already", function (done) {
-            //app = require('../web/client/app').server(3001);
 
             var test_file = path.resolve('./test/example/x/parsed.php');
-            var api = url +'state?path='+ test_file
+            var api = url +'state?path='+ test_file;
 
             request(api, function(_err, _res, _body) {
                 console.log(_body)
@@ -175,6 +174,48 @@ describe("Client web interface", function () {
                 _body.should.equal('1');
                 done();
             });
+        });
+
+
+
+        describe("parse file api", function(done) {
+            var test_file = path.resolve('./test/example/x/b.php');
+            var test_file_bak = path.resolve('./test/example/x/_b.php');
+            var center_app;
+            before(function(done) {
+             
+                center_app = center_server(3000);
+                var cp =fs.createReadStream(test_file).pipe(fs.createWriteStream(test_file_bak));
+                cp.on('close', done);
+
+            });
+            after(function(done) {
+
+                center_app.close();
+                var cp =fs.createReadStream(test_file_bak).pipe(fs.createWriteStream(test_file));
+                cp.on('close', function() {
+                    fs.unlink(test_file_bak, done);
+                });
+
+            });
+
+            it("file should be parsed", function(done) {
+                this.timeout(25000);
+                var api = url +'parse'
+                request.post({
+                    url: api,
+                    form: {
+                        path: test_file
+                    }
+                }, function(_err, _res, _body) {
+                    should.not.exist(_err);
+                    _res.should.have.status(200);
+                    fs.readFileSync(test_file, 'utf8').should.match(/i.hunantv#/);
+                    _body.should.equal('1');
+                    done();
+                });
+            });
+
         });
     
     });
