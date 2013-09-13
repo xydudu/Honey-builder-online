@@ -9,6 +9,7 @@ Honey builder online system, only work with Honey
 - [ ✓ ] 测试框架准备
 
 - [ ✓ ] 读项目文件夹，取得文件列表
+
 - [ ✓ ] 分析文件
     
     - [ ✓ ] 取配置（path and project name）
@@ -47,6 +48,7 @@ Honey builder online system, only work with Honey
     - [ ✓ ] Save config to JSON locally
     - [ ✓ ] List files where the project view directory configured
     - [ ✓ ] Remark files if it was parsed already
+    - [ ] Remove unrelated file
     - [ ✓ ] Style
     - [ ✓ ] Do package from file list page 
 
