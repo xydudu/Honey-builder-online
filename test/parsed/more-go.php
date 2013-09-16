@@ -135,11 +135,11 @@
 </div>
 <script src="http://honey.hunantv.com/honey-2.0/honey.ihunantv.js"></script>
 <script>
-                honey.go('lib:jquery-plugin:pswencode-mod:dialog-mod_suggestion-mod_login', function() {
+                honey.go("lib:jquery-plugin:pswencode-mod:dialog-mod_suggestion-mod_login"), function() {
                     console.log('methods need mod_alert');
                 });
 
-                HN.go("lib:jquery-plugin:pswencode-mod:dialog-mod_suggestion-mod_login", function() {
+                honey.go("lib:jquery-plugin:pswencode-mod:dialog-mod_suggestion-mod_login"), function() {
 	HN.lazyload();
 	HN.zoom();
 	HN.gototop();

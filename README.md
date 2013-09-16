@@ -48,7 +48,7 @@ Honey builder online system, only work with Honey
     - [ ✓ ] Save config to JSON locally
     - [ ✓ ] List files where the project view directory configured
     - [ ✓ ] Remark files if it was parsed already
-    - [ ] Remove unrelated file
+    - [ ✓ ] Remove unrelated file
     - [ ✓ ] Style
     - [ ✓ ] Do package from file list page 
 

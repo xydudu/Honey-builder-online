@@ -143,7 +143,7 @@ describe("取模块URL", function () {
     })
 });
 
-describe("替换合并后模块至页面", function() {
+describe("打包页面", function() {
     it('只有一个honey.go', function(done) {
         var mod_name = [
             "lib:jquery",
@@ -231,5 +231,30 @@ describe("替换合并后模块至页面", function() {
 
     });
 
-
 });
+
+describe("还原页面", function() {
+    
+    var test_file = path.resolve('./test/example/x/parsed.php');
+    var test_file_bak = path.resolve('./test/example/x/_parsed.php');
+    before(function(done) {
+        var cp =fs.createReadStream(test_file).pipe(fs.createWriteStream(test_file_bak));
+        cp.on('close', done);
+    });
+    after(function(done) {
+        var cp =fs.createReadStream(test_file_bak).pipe(fs.createWriteStream(test_file));
+        cp.on('close', function() {
+            fs.unlink(test_file_bak, done);
+        });
+    });
+    it("file should be restore", function(done) {
+        this.timeout(25000);
+        parser.decodeFile(test_file, function(_err) {
+            should.not.exist(_err);
+            fs.readFileSync(test_file, 'utf-8').should.match(/lib:jquery,plugin:pswencode,mod:dialog/);
+            done();
+        });
+    });
+
+
+})

@@ -17,7 +17,7 @@ var q = require('q')
 function getModules(_file) {
     var 
     content = fs.readFileSync(_file, 'utf8'),
-    regexp = /[honey|HN]\.go\(["|'](.+?)["|'],.*?function/gi,
+    regexp = /\b(?:honey|HN)\.go\(["|'](.+?)["|'],.*?function/gi,
     result = []
 
     content = content.replace(/["|'](\s+)?\+(\s+)?["|']/gi, '')
@@ -82,20 +82,39 @@ function encodeFile(_input, _name, _output, _callback) {
     
     var 
     content = fs.readFileSync(_input, 'utf8'),
-    regexp = /(.+[honey|HN]\.go\(["|'])(.+?)(["|'],.*?function.+)/gi
+    //regexp = /(.+\b(?:honey|HN)\.go\(["|'])(.+?)(["|'],.*?function.+)/gi
+    regexp = /\b(?:honey|HN)\.go\(["|'](.+?)["|'],.*?function/gi
+    //regexp = /(?:honey|HN|H)\.go/gi
 
     content = content.replace(/["|'](\s+)?\+(\s+)?["|']/gi, '')
-    content = content.replace(regexp, "$1"+ _name +"$3")
+    //content = content.replace(regexp, "$1"+ _name +"$3")
+
+
+    content = content.replace(regexp, function($1, $2) {
+        return 'honey.go("'+ _name +'"), function'
+    })
     
     fs.writeFile(_output, content, 'utf8', _callback) 
     
+}
+
+function decodeFile(_file, _callback) {
+    
+    var
+    content = fs.readFileSync(_file, 'utf8'),
+    regexp = /['|"]((.+)#([a-z]+[\:|\_].+\-?))["']/gi
+
+    content = content.replace(regexp, function($1, $2) {
+
+        return '"'+ $2.split('#')[1].split('-').join(',') +'"'
+    })
+
+    fs.writeFile(_file, content, 'utf8', _callback) 
+
 }
 
 exports.getModules = getModules
 exports.modToUrl = modToUrl
 exports.getConfigs = getConfigs
 exports.encodeFile = encodeFile
-
-//var test_file = path.resolve('./test/example/y/more-go.php');
-//var mods = getModules(test_file);
-//console.log(mods);
+exports.decodeFile = decodeFile
