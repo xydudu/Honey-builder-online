@@ -40,7 +40,7 @@ exports.server = function(_port) {
     app
         .use(connect.logger('dev'))
         .use(connect.bodyParser())
-        .use(connect.static('../assert'))
+        .use(connect.static('../assets'))
         .use(router)
         //.listen(_port)
 

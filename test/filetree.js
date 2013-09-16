@@ -25,7 +25,9 @@ describe("file state", function () {
     it("判断文件是否已处理", function () {
         var no_parsed = path.resolve('./test/example/x/a.php');
         var parsed = path.resolve('./test/example/x/parsed.php');
-        tree.fileState(no_parsed).should.be.false
-        tree.fileState(parsed).should.be.true
+        var unrelated = path.resolve('./test/example/x/unrelated.php');
+        tree.fileState(no_parsed).should.equal('0')
+        tree.fileState(parsed).should.equal('1')
+        tree.fileState(unrelated).should.equal('-1')
     });
 });

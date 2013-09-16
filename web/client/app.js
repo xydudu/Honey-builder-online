@@ -36,7 +36,8 @@ var router = dispatch({
             var file_path = req.query.path
             if (!file_path) return res.end('0')
             var state = filetree.fileState(file_path)
-            res.end(state ? '1' : '0')
+            //res.end(state ? '1' : '0')
+            res.end(state)
         }
     },
     '/parse': {
@@ -81,7 +82,7 @@ exports.server = function(_port) {
     app
         .use(connect.logger('dev'))
         .use(connectJade({
-            root: __dirname +"/../assert/views",
+            root: __dirname +"/../assets/views",
             debug: true,
             defaults: {
               title: "Honey Build Online System"
@@ -89,7 +90,7 @@ exports.server = function(_port) {
         }))
         .use(connect.query())
         .use(connect.bodyParser())
-        .use(connect.static('../assert'))
+        .use('/public', connect.static(__dirname +'/../assets'))
         .use(router)
         //.listen(_port)
 

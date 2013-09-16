@@ -41,8 +41,10 @@ function saveConfigs(_data, _callback) {
 }
 
 function fileState(_path) {
-    var result = /(honey|HN|H)\.go\(['|"](.+)#([\S\-]+)/.test(fs.readFileSync(_path))
-    return result
+    var content = fs.readFileSync(_path, 'utf8')
+    if (!/(honey|HN|H)\.go/.test(content)) return '-1'
+    var result = /(honey|HN|H)\.go\(['|"](.+)#([\S\-]+)/.test(content)
+    return result ? '1' : '0'
 }
 
 exports.getTree = getTree
