@@ -20,9 +20,8 @@ html
   body
     h1= title
     h2 文件列表 (目录：#{ path })
-    #list(style='display:none')
-      ul
-        | {{#filelist}}
+    div
+      ul#list(style='display:none')
         li(id="file-{{showindex}}")
           | {{#isparsed}}
           button#restore(class="index-{{showindex}}") 还 原
@@ -32,7 +31,6 @@ html
           | {{/isparsed}}
           span.filename {{ name }}
           |  ({{ path }})
-        | {{/filelist}}
     hr
     footer
       p Honey Lab 2013
@@ -43,47 +41,4 @@ html
       |  filelist.push({name: "#{file.name}", path: "#{file.path}"});
     | </script>
     script(src="http://honey.hunantv.com/honey-2.0/honey.newhunantv.js")
-    script(src="/asset/app.js")
-      
-
-    //|   honey.go('lib:jquery,lib:mustache', function() {
-    //|       function getState() {
-    //|         var api = '/state?path='+ this.path;
-    //|         return ~~$.ajax({
-    //|             type: "GET",
-    //|             url: api,
-    //|             async: false,
-    //|         }).responseText;
-    //|       }
-    //|       var idx = 0;
-    //|       function showindex() {
-    //|           return idx ++;    
-    //|       }
-    //        
-    //  var new_list = [];
-    //  while(filelist.length) {
-    //     
-    //  }
-
-
-    //|       var box = document.getElementById('list');
-    //|       var tpl = box.innerHTML;
-    //|       box.innerHTML = Mustache.render(tpl, {
-    //|          filelist: filelist, isparsed: isParsed, showindex: showindex});
-    //|       box.style.display = 'block';
-    //|       document.getElementById('parse').onclick = function() {
-    //|            var i = this.className.split('-')[1];
-    //|            var file = filelist[i];
-    //|            $.post('/parse', {path: file.path}, function(_res) {
-    //|                if (+_res) {
-    //|                 alert('完成');
-    //|                 $('#file-'+ i).remove();
-    //|                } else alert('Error');
-    //|            });
-    //|           return false;
-    //|       }
-    //|   })
-    //| </script>      
-      
-
-
+    script(src="/public/js/app.js")
