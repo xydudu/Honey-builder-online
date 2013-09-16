@@ -37,25 +37,23 @@ honey.go('lib:jquery,lib:mustache', function() {
                 $('#file-'+ i).remove();
             } else alert('Error');
         });
-    })
+    });
+
+    box.on('click', '#restore', function(event) {
+        event.preventDefault();
+        var 
+        i = this.className.split('-')[1],
+        file = new_list[i]
+
+        $.post('/restore', {path: file.path}, function(_res) {
+            if (+_res) {
+                alert('完成');
+                $('#file-'+ i).remove();
+            } else alert('Error');
+        });
+    });
 
 
-    //var box = document.getElementById('list');
-    //var tpl = box.innerHTML;
-    //box.innerHTML = Mustache.render(tpl, {filelist: filelist});
-    //box.style.display = 'block';
-
-    //document.getElementById('parse').onclick = function() {
-    //    var i = this.className.split('-')[1];
-    //    var file = filelist[i];
-    //    $.post('/parse', {path: file.path}, function(_res) {
-    //        if (+_res) {
-    //            alert('完成');
-    //            $('#file-'+ i).remove();
-    //        } else alert('Error');
-    //    });
-    //    return false;
-    //}
 })
 
 

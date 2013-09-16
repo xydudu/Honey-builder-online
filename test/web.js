@@ -217,6 +217,44 @@ describe("Client web interface", function () {
             });
 
         });
+        
+        describe("restore page API", function() {
+            
+            var test_file = path.resolve('./test/example/x/parsed.php');
+            var test_file_bak = path.resolve('./test/example/x/_parsed.php');
+            var center_app;
+            before(function(done) {
+                center_app = center_server(3000);
+                var cp =fs.createReadStream(test_file).pipe(fs.createWriteStream(test_file_bak));
+                cp.on('close', done);
+            });
+            after(function(done) {
+                center_app.close();
+                var cp =fs.createReadStream(test_file_bak).pipe(fs.createWriteStream(test_file));
+                cp.on('close', function() {
+                    fs.unlink(test_file_bak, done);
+                });
+            });
+            it("file should be restore", function(done) {
+                this.timeout(25000);
+                var api = url +'restore'
+                request.post({
+                    url: api,
+                    form: {
+                        path: test_file
+                    }
+                }, function(_err, _res, _body) {
+                    should.not.exist(_err);
+                    _res.should.have.status(200);
+                    fs.readFileSync(test_file, 'utf-8').should.match(/lib:jquery,plugin:pswencode,mod:dialog/);
+                    _body.should.equal('1');
+                    done();
+                });
+            });
+
+
+        })
+
     
     });
  

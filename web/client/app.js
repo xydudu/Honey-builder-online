@@ -73,8 +73,20 @@ var router = dispatch({
         'GET': function(req, res) {
             res.end('Honey Builder Client //honey lab')
         } 
+    },
+    '/restore': {
+        'POST': function(req, res) {
+            if (req.body) {
+                var file = req.body.path 
+                parser.decodeFile(file, function(_err) {
+                    res.end(_err ? '0' : '1')
+                })
+            } else res.end('0')  
+        },
+        'GET': function(req, res) {
+            res.end('Honey Builder Client //honey lab')
+        } 
     }
-
 })
 
 exports.server = function(_port) {
