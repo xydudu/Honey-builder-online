@@ -1,14 +1,16 @@
 { 
-    "name": "Honey-builder-online",
+    "name": "honey-builder",
     "description": "honey builder online system",
     "main": "./index", 
     "author": "Lian Hsueh",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "repository": {
         "type" : "git",
         "url" : "http://github.com/xydudu/Honey-builder-online.git"
     },
-    "bugs" : { "url" : "http://github.com/xydudu/Honey-builder-online/issues" },
+    "bugs" : { 
+        "url" : "http://github.com/xydudu/Honey-builder-online/issues"
+    },
     "licenses" : [
         { 
             "type" : "MIT",

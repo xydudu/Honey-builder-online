@@ -43,10 +43,14 @@ function saveConfigs(_data, _callback) {
 function fileState(_path) {
     var content = fs.readFileSync(_path, 'utf8')
     if (!/(honey|HN|H)\.go/.test(content)) return '-1'
-    var result = /(honey|HN|H)\.go\(['|"](.+)#([\S\-]+)/.test(content)
+    //var result = /(honey|HN|H)\.go\(['|"](.+)#([\S\-]+)/.test(content)
+    var result = /(honey|HN|H)\.go\(['|"]([\S\.]+)\#([\S\-]+)/.test(content)
+    console.log(result)
     return result ? '1' : '0'
 }
 
 exports.getTree = getTree
 exports.saveConfigs = saveConfigs
 exports.fileState = fileState
+
+//console.log(fileState('/Users/linlei/www/new-imgotv/imgotv/build/template/page-index.html'))

@@ -119,9 +119,9 @@
     </div>
     <div class="bottom min-h"></div>
 </div>
-<script src="http://honey.hunantv.com/honey-2.0/honey.ihunantv.js"></script>
+<script src="http://honey.hunantv.com/honey-2.0/honey.hunantv.imgo.js"></script>
 <script>
-HN.go("lib:jquery,mod:dialog,mod_alert,plugin_jvalidate,mod_area,mod_select,mod_ymddate,mod_setting", function() {
+honey.go("hunantv.imgotv#lib:jquery-mod:dialog-mod_alert-plugin_jvalidate-mod_area-mod_select-mod_ymddate-mod_setting"), function() {
 	//地区联动
 	HN.selectTwo(AREA, {id: "<?php echo isset($this->user['city_id'])&&$this->user['city_id']?$this->user['city_id']:1101;?>",pid: "<?php echo isset($this->user['province_id'])&&$this->user['province_id']?$this->user['province_id']:11;?>"}, ['province_id', 'city_id']);
 	$('#province').val($('#province_id option:selected').text());

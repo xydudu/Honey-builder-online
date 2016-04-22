@@ -25,6 +25,7 @@ honey.go('lib:jquery,lib:mustache', function() {
         });
     }
 
+
     box.on('click', '#parse', function(event) {
         event.preventDefault();
         var 
